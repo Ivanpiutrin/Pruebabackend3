@@ -10,7 +10,7 @@ class DCliente(models.Model):
     celular = models.PositiveIntegerField()
     
     
-class devolucion(models.Model):
+class Devolucion(models.Model):
     cliente = models.ForeignKey(DCliente, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=100)
     producto = models.CharField(max_length=100)
