@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class DCliente(models.Model):
@@ -7,10 +8,13 @@ class DCliente(models.Model):
     apellido = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     celular = models.PositiveIntegerField()
+    
+    
+class devolucion(models.Model):
+    cliente = models.ForeignKey(DCliente, on_delete=models.CASCADE)
     cantidad = models.CharField(max_length=100)
     producto = models.CharField(max_length=100)
     codigo = models.CharField(max_length=100)
-    nombrevendedor = models.CharField(max_length=100)
+    nombre_vendedor = models.CharField(max_length=100)
     distribuidor = models.CharField(max_length=100)
     comentario = models.CharField(max_length=100)
-    

@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
 from Devolu.models import DCliente
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def listadev(request):
     dcliente = DCliente.objects.all()
     data = {'dcliente':dcliente}
     return render(request,'listarDevolucion.html', data)
 
+@login_required
 def registrard(request):
     return render(request,'FormularioDev.html')    
 
-
+@login_required
 def registrardevo(request):
     dev_rut = request.POST['txt_rut']
     dev_nombre = request.POST['txt_nombre']
@@ -30,17 +33,19 @@ def registrardevo(request):
     return redirect('/')
 
 
-
+@login_required
 def eliminardev(request, id):
     elemidev = DCliente.objects.get(id=id)
     elemidev.delete()
 
     return redirect('/')
 
+login_required
 def devoluActualizar(request,id):
     dev = DCliente.objects.get(id=id)
     return render(request,'Actualizardev.html',{"dev":dev})    
 
+@login_required
 def editarDev(request):
     dev_rut = request.POST['txt_rut']
     dev_nombre = request.POST['txt_nombre']
