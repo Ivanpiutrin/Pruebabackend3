@@ -1,15 +1,35 @@
 from django.shortcuts import render, redirect
+#from Devolu.forms import FormRegistro
 from Devolu.models import DCliente
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
+def registrarse(request):
+    cli_username = request.POST['txt_username']
+    cli_email = request.POST['txt_email']
+    cli_password = request.POST['txt_contrasena']
+
+    user = User.objects.create_user(cli_username, cli_email, cli_password)
+    user.save()
+
+    return redirect('/inicio/login')
+    
+def registrar(request):
+    return render(request,'registrarse.html')
+
+
+    
+@login_required
 def listadev(request):
     dcliente = DCliente.objects.all()
     data = {'dcliente':dcliente}
     return render(request,'listarDevolucion.html', data)
 
+@login_required
 def registrard(request):
     return render(request,'FormularioDev.html')    
 
-
+@login_required
 def registrardevo(request):
     dev_rut = request.POST['txt_rut']
     dev_nombre = request.POST['txt_nombre']
@@ -30,17 +50,19 @@ def registrardevo(request):
     return redirect('/')
 
 
-
+@login_required
 def eliminardev(request, id):
     elemidev = DCliente.objects.get(id=id)
     elemidev.delete()
 
     return redirect('/')
 
+login_required
 def devoluActualizar(request,id):
     dev = DCliente.objects.get(id=id)
     return render(request,'Actualizardev.html',{"dev":dev})    
 
+@login_required
 def editarDev(request):
     dev_rut = request.POST['txt_rut']
     dev_nombre = request.POST['txt_nombre']
