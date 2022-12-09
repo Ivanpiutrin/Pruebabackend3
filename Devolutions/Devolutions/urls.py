@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Devolu.views import registrarse, listadev, registrard,registrardevo, eliminardev, devoluActualizar, editarDev, registrar
+from Devolu.views import registrarse, listadev, registrard,registrardevo, eliminardev, devoluActualizar, editarDev, registrar,menu, crearVend
 
 urlpatterns = [
     path('inicio/', include('django.contrib.auth.urls')),
@@ -27,5 +27,8 @@ urlpatterns = [
     path('eliminar/<id>',eliminardev),
     path('actualizar/<id>', devoluActualizar),
     path('editardevo/', editarDev),
-    path('registrar/', registrar)
+    path('registrar/', registrar),
+    path('menu/',menu),
+    path('crearuser/', crearVend)
+
 ]

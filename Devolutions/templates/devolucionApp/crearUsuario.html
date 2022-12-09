@@ -9,22 +9,22 @@
     <title>Registrarse</title>
 </head>
 <body>
-   <form action='/registrarse/' method="POST">{% csrf_token %}
+   <form action='/crearuser/' method="POST">{% csrf_token %}
       <div class="alert alert-info display-1 text-center">Registrarse</div>
 
       <div class="mb-3">
          <label class= "form-label"> Nombre Usuario</label>
-         <input type="text" class="form-control" id="txt_username" name="txt_username"  required>
+         <input type="text" class="form-control" id="txt_username" name="txt_usernamev"  required>
       </div>
 
       <div class="mb-3">
          <label class= "form-label"> Email</label>
-         <input type="text" class="form-control" id="txt_email" name="txt_email"  required>
+         <input type="text" class="form-control" id="txt_email" name="txt_emailv"  required>
       </div>
 
       <div class="mb-3">
          <label class= "form-label">Contraseña</label>
-         <input type="password" class="form-control" id="txt_contrasena" name="txt_contrasena" required>
+         <input type="password" class="form-control" id="txt_contrasena" name="txt_password" required>
       </div>
 
 

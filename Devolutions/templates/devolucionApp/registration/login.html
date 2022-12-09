@@ -9,7 +9,7 @@
     <title>Iniciar sesion</title>
 </head>
 <body class="container mt-5">
-    <div class="alert alert-info display-1 text-center">Iniciar sesión</div>
+    <div class="alert alert-info display-1 text-center">Iniciar sesión Administrador</div>
     {% if form.errors %}
         <p>El usuario o la contraseña son incorrectos</p>
     {% endif %}
@@ -18,10 +18,7 @@
             {{ form.as_table }}
             {% csrf_token %}
     
-            <tr>
-                <td></td>
-               <td><a href="/registrar/" class="btn btn-outline-secondary">Registrarse</a></td>
-            </tr>
+
             <tr>
                 <td></td>
                 <td>
@@ -29,8 +26,16 @@
                     <input type="hidden" name="next" value="{{ next }}" />
                 </td>
             </tr>
+
+            <tr>
+                <td></td>
+               <td><a href="/registrar/" class="btn btn-outline-secondary">Registrarse</a></td>
+               
+            </tr>
         </table>
     </form>
     <p><a href="{% url 'password_reset' %}">¿Contraseña olvidada?</a></p>
+    <p><a href="{% url 'password_reset' %}">Iniciar sesion cliente</a></p>
+    
 </body>
 </html>

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 #from Devolu.forms import FormRegistro
 from Devolu.models import DCliente
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 def registrarse(request):
     cli_username = request.POST['txt_username']
@@ -11,13 +12,23 @@ def registrarse(request):
 
     user = User.objects.create_user(cli_username, cli_email, cli_password)
     user.save()
+    grupo, created = Group.objects.get_or_create(name ='admin')
+    user.groups.add(grupo)
 
     return redirect('/inicio/login')
     
 def registrar(request):
+    if request.user.is_authenticated:
+        redirect('/menu/')
     return render(request,'registrarse.html')
 
+def crearVend(request):
+    v_username = request.POST['txt_usernamev']
+    v_email = request.POST['txt_emailv']
+    v_password = request.POST['txt_password']
 
+    use = User.objects.create_user(v_username,v_email,v_password)
+    use.save
     
 @login_required
 def listadev(request):
@@ -57,7 +68,7 @@ def eliminardev(request, id):
 
     return redirect('/')
 
-login_required
+@login_required
 def devoluActualizar(request,id):
     dev = DCliente.objects.get(id=id)
     return render(request,'Actualizardev.html',{"dev":dev})    
@@ -91,3 +102,8 @@ def editarDev(request):
 
     devolu.save()
     return redirect('/')
+
+
+@login_required
+def menu(request):
+    return render(request,'menu.html')    
