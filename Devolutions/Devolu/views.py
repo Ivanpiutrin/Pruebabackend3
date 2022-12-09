@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 #from Devolu.forms import FormRegistro
-from Devolu.models import DCliente
+from Devolu.models import DCliente, Devolucion
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
@@ -54,9 +54,10 @@ def registrardevo(request):
     dev_distribuidor = request.POST['txt_distribuidor']
     dev_comentario = request.POST['txt_comentario']
 
-    devolucion = DCliente(rut = dev_rut, nombre = dev_nombre, apellido = dev_apellido, email = dev_email, celular = dev_celular, cantidad = dev_cantidad, producto = dev_producto, codigo = dev_codigo, nombrevendedor = dev_nombreV, distribuidor = dev_distribuidor, comentario = dev_comentario)
-
+    devolucion = DCliente(rut = dev_rut, nombre = dev_nombre, apellido = dev_apellido, email = dev_email, celular = dev_celular, )
+    dev = Devolucion( cantidad = dev_cantidad, producto = dev_producto, codigo = dev_codigo, nombre_vendedor = dev_nombreV, distribuidor = dev_distribuidor, comentario = dev_comentario)
     devolucion.save()
+    dev.save()
 
     return redirect('/')
 
@@ -66,7 +67,7 @@ def eliminardev(request, id):
     elemidev = DCliente.objects.get(id=id)
     elemidev.delete()
 
-    return redirect('/')
+    return redirect(registrardevo)
 
 @login_required
 def devoluActualizar(request,id):
@@ -88,17 +89,17 @@ def editarDev(request):
     dev_comentario = request.POST['txt_comentario']
 
     devolu = DCliente.objects.get(rut = dev_rut)
-
+    dev = Devolucion.objects.get(cantidad = dev_cantidad)
     devolu.nombre = dev_nombre
     devolu.apellido = dev_apellido
     devolu.email = dev_email
     devolu.celular = dev_celular
-    devolu.cantidad = dev_cantidad
-    devolu.producto = dev_producto
-    devolu.codigo = dev_codigo
-    devolu.nombrevendedor = dev_nombreV
-    devolu.distribuidor = dev_distribuidor
-    devolu.comentario = dev_comentario
+    dev.cantidad = dev_cantidad
+    dev.producto = dev_producto
+    dev.codigo = dev_codigo
+    dev.nombre_vendedor = dev_nombreV
+    dev.distribuidor = dev_distribuidor
+    dev.comentario = dev_comentario
 
     devolu.save()
     return redirect('/')
