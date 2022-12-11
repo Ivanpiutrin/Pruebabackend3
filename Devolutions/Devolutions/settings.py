@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-ww&4+s@9%ctv(@jd)yg8$25veug0&rmdr%v!df%jlx@fiq1nal
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+LOGIN_URL = '/inicio/login/'
 LOGIN_REDIRECT_URL = '/menu/'
+
+AUTH_USER_MODEL = 'Devolu.AdminUser'
 
 
 # Application definition
@@ -80,14 +84,14 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'devo',
+        'USER': 'root',
+        'PASSWORD': ''
         #'NAME': 'grupo3',
-        #'USER': 'root',
-        #'PASSWORD': ''
-        'NAME': 'grupo3',
-        'HOST': '165.227.196.34',
-        'USER': 'grupo3',
-        'PASSWORD': 'inacap.2022',
-        'PORT' : '3306'
+        #'HOST': '165.227.196.34',
+        #'USER': 'grupo3',
+        #'PASSWORD': 'inacap.2022',
+        #'PORT' : '3306'
     }
 }
 
